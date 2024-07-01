@@ -1,0 +1,18 @@
+<div class="container">
+    <h2>Product List</h2>
+
+    <div *ngIf="(product$ | async)?.length === 0 " class="alert alert-info">
+        No products found.
+    </div>
+
+    <div class="card" *ngFor="let product of product$ | async">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">Price: {{ product.price | currency}}</p>
+            <p class="card-text">Stock: {{ product.stock }}</p>
+            <a [routerLink]="['/details', product.id]">View Full Details</a>
+            <a [routerLink]="['/update', product.id]">Edit Product</a>
+            <button (click)="deleteProduct(product.id)">Delete</button>
+        </div>
+    </div>
+</div>
